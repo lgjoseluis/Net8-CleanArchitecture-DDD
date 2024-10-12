@@ -3,12 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8BD1CB42-072C-4C83-9685-1A4B45891E63}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3CAC7A73-58FB-4567-87F9-636F463FCE7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alfa.CarRental.Domain", "src\Domain\Alfa.CarRental.Domain\Alfa.CarRental.Domain.csproj", "{327507EE-20D3-4CA0-AC52-B2F15365B862}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{327507EE-20D3-4CA0-AC52-B2F15365B862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327507EE-20D3-4CA0-AC52-B2F15365B862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327507EE-20D3-4CA0-AC52-B2F15365B862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327507EE-20D3-4CA0-AC52-B2F15365B862}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CAC7A73-58FB-4567-87F9-636F463FCE7C} = {8BD1CB42-072C-4C83-9685-1A4B45891E63}
+		{327507EE-20D3-4CA0-AC52-B2F15365B862} = {3CAC7A73-58FB-4567-87F9-636F463FCE7C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E270F168-B5F5-444F-AF9B-AA17B3312D5A}
 	EndGlobalSection
 EndGlobal
