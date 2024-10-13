@@ -51,6 +51,8 @@ public sealed class Rental:Entity
 
     public DateTime DenialDate { get; private set; }
 
+    public DateTime CompleteDate { get; private set; }
+
     public DateTime CancelDate { get; private set; }
 
     public static Rental Reserve(
@@ -130,6 +132,21 @@ public sealed class Rental:Entity
         CancelDate = utcNow;
 
         RaiseDomainEvent(new RentalCanceledDomainEvent(Id));
+
+        return Result.Success();
+    }
+
+    public Result Comlete(DateTime utcNow)
+    {
+        if (Status != RentalStatus.Confirmed)
+        {
+            return Result.Failure(RentalErrors.NotConfirmed);
+        }
+
+        Status = RentalStatus.Completed;
+        CompleteDate = utcNow;
+
+        RaiseDomainEvent(new RentalCompletedDomainEvent(Id));
 
         return Result.Success();
     }

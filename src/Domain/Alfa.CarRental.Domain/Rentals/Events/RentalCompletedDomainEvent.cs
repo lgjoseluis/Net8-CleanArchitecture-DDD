@@ -2,5 +2,4 @@
 
 namespace Alfa.CarRental.Domain.Rentals.Events;
 
-public sealed record RentalReservedDomainEvent(Guid rentalId):IDomainEvent;
-
+public sealed record RentalCompletedDomainEvent(Guid rentalId):IDomainEvent;
