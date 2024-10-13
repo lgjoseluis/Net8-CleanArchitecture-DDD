@@ -10,7 +10,7 @@ public sealed class Rental:Entity
     private Rental(Guid id,
         Guid vehicleId,
         Guid userId,
-        DateRange dateSpan,
+        DateRange dateRange,
         Currency price,
         Currency maintenanceCost,
         Currency accessoriesCost,
@@ -21,7 +21,7 @@ public sealed class Rental:Entity
     {
         VehicleId = vehicleId;
         UserId = userId;
-        DateSpan = dateSpan;
+        DateRange = dateRange;
         Price = price;
         MaintenanceCost = maintenanceCost;
         AccessoriesCost = accessoriesCost;
@@ -42,7 +42,7 @@ public sealed class Rental:Entity
 
     public RentalStatus Status { get; private set; }
 
-    public DateRange DateSpan { get; private set; }
+    public DateRange DateRange { get; private set; }
 
     public Currency TotalPrice {  get; private set; }
 
@@ -59,17 +59,17 @@ public sealed class Rental:Entity
     public static Rental Reserve(
         Vehicle vehicle,
         Guid userId,
-        DateRange dateSpan,
+        DateRange dateRange,
         DateTime createDate,
         PriceService priceService)
     {
-        DetailPrice detailPrice = priceService.Caulculate(vehicle, dateSpan);
+        DetailPrice detailPrice = priceService.Caulculate(vehicle, dateRange);
 
         Rental rental = new Rental(
             Guid.NewGuid(),
             vehicle.Id,
             userId,
-            dateSpan,
+            dateRange,
             detailPrice.Price,
             detailPrice.MaintenanceCost,
             detailPrice.AccessoriesCost,
@@ -124,7 +124,7 @@ public sealed class Rental:Entity
 
         DateOnly currentDate = DateOnly.FromDateTime(utcNow);
 
-        if(currentDate> DateSpan!.StartDate)
+        if(currentDate> DateRange!.StartDate)
         {
             return Result.Failure(RentalErrors.AlreadyStarted);
         }

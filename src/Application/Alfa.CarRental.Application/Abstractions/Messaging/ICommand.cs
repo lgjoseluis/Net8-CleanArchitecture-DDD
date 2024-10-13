@@ -12,6 +12,6 @@ public interface ICommand<TResponse> : IRequest<Result<TResponse>>, IBaseCommand
 {
 }
 
-public interface IBaseCommand : IRequest<Result>
+public interface IBaseCommand
 {
 }
