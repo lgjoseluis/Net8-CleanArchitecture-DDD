@@ -1,4 +1,4 @@
-﻿namespace Alfa.CarRental.Domain.Vehicles;
+﻿namespace Alfa.CarRental.Domain.Shared;
 
 public record CurrencyType
 {
@@ -6,7 +6,7 @@ public record CurrencyType
     public static readonly CurrencyType USD = new CurrencyType("USD");
     public static readonly CurrencyType EUR = new CurrencyType("EUR");
 
-    public string? Code {  get; init; }
+    public string? Code { get; init; }
 
     public CurrencyType(string code)
     {
@@ -20,7 +20,7 @@ public record CurrencyType
     };
 
     public static CurrencyType FromCode(string code)
-    { 
+    {
         return All.FirstOrDefault(x => x.Code == code) ?? throw new ApplicationException("The currency type is incorrect");
     }
 }

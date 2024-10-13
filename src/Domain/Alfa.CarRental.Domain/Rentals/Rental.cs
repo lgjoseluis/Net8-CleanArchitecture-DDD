@@ -1,5 +1,6 @@
 ﻿using Alfa.CarRental.Domain.Abstractions;
 using Alfa.CarRental.Domain.Rentals.Events;
+using Alfa.CarRental.Domain.Shared;
 using Alfa.CarRental.Domain.Vehicles;
 
 namespace Alfa.CarRental.Domain.Rentals;

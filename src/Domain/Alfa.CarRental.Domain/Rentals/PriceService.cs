@@ -1,4 +1,5 @@
-﻿using Alfa.CarRental.Domain.Vehicles;
+﻿using Alfa.CarRental.Domain.Shared;
+using Alfa.CarRental.Domain.Vehicles;
 
 namespace Alfa.CarRental.Domain.Rentals;
 
