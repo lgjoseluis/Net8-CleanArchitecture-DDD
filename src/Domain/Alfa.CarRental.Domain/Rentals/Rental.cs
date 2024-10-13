@@ -54,15 +54,17 @@ public sealed class Rental:Entity
     public DateTime CancelDate { get; private set; }
 
     public static Rental Reserve(
-        Guid vehicleId,
+        Vehicle vehicle,
         Guid userId,
         DateRange dateSpan,
         DateTime createDate,
-        DetailPrice detailPrice)
+        PriceService priceService)
     {
+        DetailPrice detailPrice = priceService.Caulculate(vehicle, dateSpan);
+
         Rental rental = new Rental(
             Guid.NewGuid(),
-            vehicleId,
+            vehicle.Id,
             userId,
             dateSpan,
             detailPrice.Price,
@@ -74,6 +76,8 @@ public sealed class Rental:Entity
             );
 
         rental.RaiseDomainEvent(new RentalReservedDomainEvent(rental.Id));
+
+        vehicle.LastRentalDate = createDate;
 
         return rental;
     }

@@ -34,7 +34,7 @@ public sealed class Vehicle : Entity
 
     public Currency MaintenanceCost {  get; private set; } 
 
-    public DateTime LastRentalDate { get; private set; }
+    public DateTime LastRentalDate { get; internal set; }
 
     public List<Accessory> Accessories { get; private set; }
 
