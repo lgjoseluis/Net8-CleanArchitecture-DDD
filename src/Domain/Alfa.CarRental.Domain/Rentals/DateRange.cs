@@ -8,9 +8,9 @@ public sealed record DateRange
         EndDate = endDate;
     }
 
-    DateOnly StartDate {  get; init; }
+    public DateOnly StartDate {  get; init; }
 
-    DateOnly EndDate { get; init; }
+    public DateOnly EndDate { get; init; }
 
     public int Days => EndDate.DayNumber - StartDate.DayNumber;
 

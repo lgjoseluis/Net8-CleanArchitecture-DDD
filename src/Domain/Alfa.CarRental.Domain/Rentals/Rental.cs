@@ -81,4 +81,56 @@ public sealed class Rental:Entity
 
         return rental;
     }
+
+    public Result Confirm(DateTime utcNow)
+    {
+        if (Status != RentalStatus.Reserved)
+        {
+            return Result.Failure(RentalErrors.NotReserved);
+        }
+
+        Status = RentalStatus.Confirmed;
+        ConfirmDate = utcNow;
+
+        RaiseDomainEvent(new RentalConfirmedDomainEvent(Id));
+
+        return Result.Success();
+    }
+
+    public Result Reject(DateTime utcNow)
+    {
+        if (Status != RentalStatus.Reserved)
+        {
+            return Result.Failure(RentalErrors.NotReserved);
+        }
+
+        Status = RentalStatus.Rejected;
+        DenialDate = utcNow;
+
+        RaiseDomainEvent(new RentalRejectedDomainEvent(Id));
+
+        return Result.Success();
+    }
+
+    public Result Cancel(DateTime utcNow)
+    {
+        if (Status != RentalStatus.Confirmed)
+        {
+            return Result.Failure(RentalErrors.NotConfirmed);
+        }
+
+        DateOnly currentDate = DateOnly.FromDateTime(utcNow);
+
+        if(currentDate> DateSpan!.StartDate)
+        {
+            return Result.Failure(RentalErrors.AlreadyStarted);
+        }
+
+        Status = RentalStatus.Canceled;
+        CancelDate = utcNow;
+
+        RaiseDomainEvent(new RentalCanceledDomainEvent(Id));
+
+        return Result.Success();
+    }
 }
