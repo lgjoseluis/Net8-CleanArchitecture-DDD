@@ -4,7 +4,7 @@ namespace Alfa.CarRental.Application.Rentals.BookRental;
 
 public record BookRentalCommand(
     Guid VehicleId,
-    Guid Userid,
+    Guid UserId,
     DateOnly StartDate,
     DateOnly EndDate
     ) : ICommand<Guid>;    

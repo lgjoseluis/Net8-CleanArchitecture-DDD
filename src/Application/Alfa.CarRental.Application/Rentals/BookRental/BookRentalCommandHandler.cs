@@ -35,7 +35,7 @@ internal sealed class BookRentalCommandHandler : ICommandHandler<BookRentalComma
 
     public async Task<Result<Guid>> Handle(BookRentalCommand request, CancellationToken cancellationToken)
     {
-        User? user = await _userRepository.FindByIdAsync(request.Userid, cancellationToken);
+        User? user = await _userRepository.FindByIdAsync(request.UserId, cancellationToken);
         Vehicle? vehicle = await _vehicleRepository.FindByIdAsync(request.VehicleId, cancellationToken);
 
         if (user is null) 
