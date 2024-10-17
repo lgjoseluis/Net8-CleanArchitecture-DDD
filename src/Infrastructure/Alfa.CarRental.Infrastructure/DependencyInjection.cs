@@ -1,11 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Alfa.CarRental.Application.Abstractions.Clock;
 using Alfa.CarRental.Infrastructure.Clock;
 using Alfa.CarRental.Application.Abstractions.EMail;
 using Alfa.CarRental.Infrastructure.EMail;
-using Microsoft.EntityFrameworkCore;
+using Alfa.CarRental.Domain.Users;
+using Alfa.CarRental.Infrastructure.Repositories;
+using Alfa.CarRental.Domain.Vehicles;
+using Alfa.CarRental.Domain.Rentals;
+using Alfa.CarRental.Domain.Abstractions;
+using Dapper;
+using Alfa.CarRental.Infrastructure.Data;
+using Alfa.CarRental.Application.Abstractions.Data;
 
 namespace Alfa.CarRental.Infrastructure;
 
@@ -21,6 +29,18 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>(options => {
             options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
         });
+
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IVehicleRepository, VehicleRepository>();
+        services.AddScoped<IRentalRepository, RentalRepository>();
+
+        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
+
+        services.AddSingleton<ISqlConnectionFactory>(_ => {
+            return new SqlConnectionFactory(connectionString);
+        });
+
+        SqlMapper.AddTypeHandler(new DateOnlyTypeHandler());
 
         return services;
     }

@@ -57,7 +57,7 @@ internal sealed class BookRentalCommandHandler : ICommandHandler<BookRentalComma
 
         Rental rental = Rental.Reserve(vehicle, user.Id, dateRange, _dateTimeProvider.CurrentTime, _priceService);
 
-        _rentalRepository.Add(rental);
+        await _rentalRepository.AddAsync(rental);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);      
         

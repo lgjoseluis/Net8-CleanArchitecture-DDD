@@ -8,5 +8,5 @@ public interface IRentalRepository
 
     Task<bool> IsOverlappingAsync(Vehicle vehicle, DateRange dateRange, CancellationToken cancellationToken = default);
 
-    void Add(Rental rental);
+    Task AddAsync(Rental rental);
 }
