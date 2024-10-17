@@ -1,3 +1,3 @@
 ﻿namespace Alfa.CarRental.Domain.Reviews;
 
-public sealed record Comment(string value);
+public sealed record Comment(string Value);
