@@ -1,0 +1,6 @@
+@Alfa.CarRental.WebApi_HostAddress = http://localhost:5110
+
+GET {{Alfa.CarRental.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
