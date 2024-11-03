@@ -1,6 +1,7 @@
 ﻿
 using Alfa.CarRental.Application.Abstractions.Clock;
 using Alfa.CarRental.Application.Abstractions.Messaging;
+using Alfa.CarRental.Application.Exceptions;
 using Alfa.CarRental.Domain.Abstractions;
 using Alfa.CarRental.Domain.Rentals;
 using Alfa.CarRental.Domain.Users;
@@ -55,12 +56,19 @@ internal sealed class BookRentalCommandHandler : ICommandHandler<BookRentalComma
             return Result.Failure<Guid>(RentalErrors.Overlap);
         }
 
-        Rental rental = Rental.Reserve(vehicle, user.Id, dateRange, _dateTimeProvider.CurrentTime, _priceService);
+        try
+        {
+            Rental rental = Rental.Reserve(vehicle, user.Id, dateRange, _dateTimeProvider.CurrentTime, _priceService);
 
-        await _rentalRepository.AddAsync(rental);
+            await _rentalRepository.AddAsync(rental);
 
-        await _unitOfWork.SaveChangesAsync(cancellationToken);      
-        
-        return rental.Id;
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return rental.Id;
+        }
+        catch (ConcurrencyException) 
+        {
+            return Result.Failure<Guid>(RentalErrors.Overlap);
+        }
     }
 }
