@@ -7,6 +7,8 @@ namespace Alfa.CarRental.Domain.Rentals;
 
 public sealed class Rental:Entity
 {
+    private Rental(){ }
+
     private Rental(Guid id,
         Guid vehicleId,
         Guid userId,

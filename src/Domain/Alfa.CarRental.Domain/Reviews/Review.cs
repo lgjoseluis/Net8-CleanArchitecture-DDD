@@ -18,6 +18,8 @@ public sealed class Review : Entity
 
     public DateTime CreateDate { get; private set; }
 
+    private Review(){ }
+
     private Review(
         Guid id,
         Guid vehicleId,

@@ -5,6 +5,8 @@ namespace Alfa.CarRental.Domain.Vehicles;
 
 public sealed class Vehicle : Entity
 {
+    private Vehicle(){ }
+
     private Vehicle( 
         Guid id,
         Model model,

@@ -1,5 +1,6 @@
 using Alfa.CarRental.Application;
 using Alfa.CarRental.Infrastructure;
+using Alfa.CarRental.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//app.ApplyMigration();
 
 app.UseHttpsRedirection();
 
