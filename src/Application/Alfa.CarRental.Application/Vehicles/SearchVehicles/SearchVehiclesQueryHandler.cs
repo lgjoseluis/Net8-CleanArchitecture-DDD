@@ -37,22 +37,22 @@ internal sealed class SearchVehiclesQueryHandler : IQueryHandler<SearchVehiclesQ
                 a.id as Id,
                 a.model as Model,
                 a.serie as Serie,
-                a.price as Price,
-                a.currency_type as CurrencyType,
-                a.adresss_country as Country,
+                a.price_amount as Price,
+                a.price_currency_type as CurrencyType,
+                a.address_country as Country,
                 a.address_city as City,
                 a.address_province as Province,
                 a.address_department as Department,
                 a.address_street as Street
-            FROM vehiclesas a
+            FROM vehicles AS a
             WHERE NOT EXISTS
             (
                 SELECT 1
                 FROM rentals AS b
                 WHERE b.vehicle_id = a.id
-                    AND b.start_date <= @EndDate
-                    AND b.end_date >= @StartDate
-                    abd b.status = ANY(@ActiveRentalStatuses)
+                    AND b.date_range_start_date <= @EndDate
+                    AND b.date_range_end_date >= @StartDate
+                    AND b.status = ANY(@ActiveRentalStatuses)
             )
             """;
 
