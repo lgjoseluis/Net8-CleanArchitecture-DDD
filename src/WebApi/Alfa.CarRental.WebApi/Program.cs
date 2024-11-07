@@ -23,6 +23,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.ApplyMigration();
+app.UseCustomExceptionHandler();
 app.SeedData();
 
 app.UseHttpsRedirection();

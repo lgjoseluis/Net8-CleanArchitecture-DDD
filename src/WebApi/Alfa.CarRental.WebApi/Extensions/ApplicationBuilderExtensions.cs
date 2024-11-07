@@ -1,4 +1,5 @@
 ﻿using Alfa.CarRental.Infrastructure;
+using Alfa.CarRental.WebApi.Middlewares;
 using Microsoft.EntityFrameworkCore;
 
 namespace Alfa.CarRental.WebApi.Extensions
@@ -25,6 +26,11 @@ namespace Alfa.CarRental.WebApi.Extensions
                     logger.LogError(ex, "Migration error");
                 }
             }
+        }
+
+        public static void UseCustomExceptionHandler(this IApplicationBuilder app) 
+        {
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
         }
     }
 }
